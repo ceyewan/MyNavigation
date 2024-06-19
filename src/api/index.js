@@ -7,11 +7,13 @@ import fetchJsonp from "fetch-jsonp";
  */
 // 获取高德地理位置信息
 export const getAdcode = async (key) => {
-  return axios({
-    method: "GET",
-    url: "https://restapi.amap.com/v3/ip",
-    params: { key },
-  });
+  // return axios({
+  //   method: "GET",
+  //   url: "https://restapi.amap.com/v3/ip",
+  //   params: { key },
+  // });
+  const res = await fetch(`https://restapi.amap.com/v3/ip?key=${key}`);
+  return await res.json();
 };
 
 // 获取高德地理天气信息
@@ -22,6 +24,14 @@ export const getWeather = async (key, city) => {
     params: { key, city, extensions: "base" },
   });
 };
+
+// 获取高德地理天气信息
+// export const getWeather = async (key, city) => {
+//   const res = await fetch(
+//     `https://restapi.amap.com/v3/weather/weatherInfo?key=${key}&city=${city}`,
+//   );
+//   return await res.json();
+// };
 
 /**
  * 获取搜索建议

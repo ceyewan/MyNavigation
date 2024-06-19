@@ -3,7 +3,7 @@
     <div class="copyright">
       <span class="site-name">{{ siteName }}</span>
       <span class="year">{{ fullYear }}</span>
-      <span class="anthor" @click="jumpTo(copyrightLink ?? 'https://github.com/imsyy/Snavigation')">
+      <span class="anthor" @click="jumpTo(copyrightLink ?? 'https://github.com/ceyewan/Mynavigation')">
         {{ siteAnthor }}
       </span>
       <span v-if="icp" class="icp" @click="jumpTo('https://beian.miit.gov.cn')">
@@ -12,12 +12,7 @@
       <span class="about" @click="aboutSiteModal = true">关于</span>
     </div>
     <!-- 关于 -->
-    <n-modal
-      preset="card"
-      :bordered="false"
-      v-model:show="aboutSiteModal"
-      transform-origin="center"
-    >
+    <n-modal preset="card" :bordered="false" v-model:show="aboutSiteModal" transform-origin="center">
       <div class="about-modal">
         <div class="about">
           <span class="name">{{ siteName }}</span>
@@ -25,7 +20,7 @@
         </div>
         <div class="desc">
           <n-space class="link" justify="center">
-            <n-button strong secondary @click="jumpTo('https://github.com/imsyy/Snavigation')">
+            <n-button strong secondary @click="jumpTo('https://github.com/ceyewan/Mynavigation')">
               Github
             </n-button>
           </n-space>
@@ -74,19 +69,23 @@ const jumpTo = (url) => {
   width: 100%;
   color: var(--main-text-color);
   z-index: 1;
+
   .copyright {
     display: flex;
     align-items: center;
     font-size: 13px;
+
     span {
       margin: 0 2px;
       opacity: 0.6;
       transition: opacity 0.3s;
+
       &::before {
         opacity: 0.6;
         transition: none;
       }
     }
+
     .year {
       &::before {
         content: "@";
@@ -94,45 +93,54 @@ const jumpTo = (url) => {
         margin-right: 4px;
       }
     }
+
     .icp {
       &::before {
         content: "|";
         margin-right: 4px;
       }
     }
+
     .about {
       &::before {
         content: "|";
         margin-right: 4px;
       }
     }
+
     .anthor,
     .icp,
     .about {
       cursor: pointer;
+
       &:hover {
         opacity: 1;
       }
     }
   }
 }
+
 .about-modal {
   margin-bottom: 10px;
+
   .about {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
+
     .name {
       font-size: 26px;
       font-weight: bold;
       margin-bottom: 4px;
     }
+
     .version {
       opacity: 0.6;
       font-size: 16px;
     }
   }
+
   .desc {
     margin-top: 20px;
   }

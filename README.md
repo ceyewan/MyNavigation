@@ -1,9 +1,9 @@
 <p>
-<strong><h2>Snavigation</h2></strong>
+<strong><h2>Mynavigation</h2></strong>
 一个简约的起始页
 </p>
 
-![Snavigation.png](https://s2.loli.net/2022/07/15/FE6U2BJCynHDep8.jpg)
+![Mynavigation.png](https://s2.loli.net/2022/07/15/FE6U2BJCynHDep8.jpg)
 
 > 重构中，尚未完成
 
@@ -11,8 +11,8 @@
 
 > 由于 `CDN` 缓存原因，查看最新效果可能需要 `Ctrl` + `F5` 强制刷新浏览器缓存
 
-- [Snavigation](https://nav.imsyy.top)
-- [Snavigation Dev](https://snavigation-git-dev-imsyy.vercel.app/)
+- [Mynavigation](https://nav.imsyy.top)
+- [Mynavigation Dev](https://Mynavigation-git-dev-imsyy.vercel.app/)
 
 ### 功能
 

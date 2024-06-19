@@ -4,48 +4,28 @@
     <Cover @loadComplete="loadComplete" />
     <!-- 主界面 -->
     <Transition name="fade" mode="out-in">
-      <main
-        v-if="status.imgLoadStatus"
-        tabindex="0"
-        id="main"
-        :class="`main-${status.siteStatus}`"
-        :style="{ pointerEvents: mainClickable ? 'auto' : 'none' }"
-        @click="status.setSiteStatus('normal')"
-        @contextmenu="mainContextmenu"
-        @keydown="mainPressKeyboard"
-      >
+      <main v-if="status.imgLoadStatus" tabindex="0" id="main" :class="`main-${status.siteStatus}`"
+        :style="{ pointerEvents: mainClickable ? 'auto' : 'none' }" @click="status.setSiteStatus('normal')"
+        @contextmenu="mainContextmenu" @keydown="mainPressKeyboard">
         <WeatherTime />
         <SearchInp @contextmenu.stop />
         <AllFunc @contextmenu.stop />
         <Footer />
         <!-- 状态切换 -->
         <Transition name="fade">
-          <div
-            class="all-controls"
-            v-show="status.siteStatus !== 'focus' && status.siteStatus !== 'normal'"
-          >
-            <div
-              class="change-status"
-              :title="status.mainBoxBig ? '收起' : '展开'"
-              @click.stop="status.setMainBoxBig(!status.mainBoxBig)"
-            >
+          <div class="all-controls" v-show="status.siteStatus !== 'focus' && status.siteStatus !== 'normal'">
+            <div class="change-status" :title="status.mainBoxBig ? '收起' : '展开'"
+              @click.stop="status.setMainBoxBig(!status.mainBoxBig)">
               <Transition name="fade" mode="out-in">
-                <SvgIcon
-                  :iconName="`icon-${status.mainBoxBig ? 'packup' : 'unfold'}`"
-                  :key="status.mainBoxBig ? 'packup' : 'unfold'"
-                />
+                <SvgIcon :iconName="`icon-${status.mainBoxBig ? 'packup' : 'unfold'}`"
+                  :key="status.mainBoxBig ? 'packup' : 'unfold'" />
               </Transition>
             </div>
-            <div
-              class="change-status"
-              :title="status.siteStatus !== 'set' ? '设置' : '首页'"
-              @click.stop="status.setSiteStatus(status.siteStatus !== 'set' ? 'set' : 'normal')"
-            >
+            <div class="change-status" :title="status.siteStatus !== 'set' ? '设置' : '首页'"
+              @click.stop="status.setSiteStatus(status.siteStatus !== 'set' ? 'set' : 'normal')">
               <Transition name="fade" mode="out-in">
-                <SvgIcon
-                  :iconName="`icon-${status.siteStatus !== 'set' ? 'setting' : 'home'}`"
-                  :key="status.siteStatus !== 'set' ? 'setting' : 'home'"
-                />
+                <SvgIcon :iconName="`icon-${status.siteStatus !== 'set' ? 'setting' : 'home'}`"
+                  :key="status.siteStatus !== 'set' ? 'setting' : 'home'" />
               </Transition>
             </div>
           </div>
@@ -53,7 +33,7 @@
       </main>
       <div v-else id="loading">
         <img src="/icon/logo.png" alt="logo" class="logo" />
-        <span class="tip">开发中</span>
+        <span class="tip">册页晚</span>
       </div>
     </Transition>
   </Provider>
@@ -136,6 +116,7 @@ onMounted(() => {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
   &.main-normal,
   &.main-focus {
     .main-box {
@@ -145,6 +126,7 @@ onMounted(() => {
       pointer-events: none;
     }
   }
+
   &.main-box,
   &.main-set {
     .main-box {
@@ -152,10 +134,12 @@ onMounted(() => {
       margin-top: 20vh;
       transform: scale(1);
       visibility: visible;
+
       @media (max-width: 478px) {
         margin-top: 22vh;
       }
     }
+
     .search-input {
       :deep(.all) {
         opacity: 0;
@@ -164,6 +148,7 @@ onMounted(() => {
       }
     }
   }
+
   .all-controls {
     position: fixed;
     width: 100%;
@@ -174,6 +159,7 @@ onMounted(() => {
     align-items: center;
     justify-content: space-between;
     box-sizing: border-box;
+
     .change-status {
       cursor: pointer;
       display: flex;
@@ -188,24 +174,29 @@ onMounted(() => {
         opacity 0.3s,
         background-color 0.3s,
         transform 0.3s;
+
       &:hover {
         backdrop-filter: blur(20px);
         background-color: var(--main-background-light-color);
       }
+
       &:active {
         transform: scale(0.95);
       }
     }
   }
 }
+
 #loading {
   color: var(--main-text-color);
+
   .logo {
     width: 100px;
     height: 100px;
     margin-bottom: 24px;
     animation: logo-breathe 3s infinite alternate;
   }
+
   .tip {
     font-size: 20px;
   }

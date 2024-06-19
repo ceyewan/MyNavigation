@@ -7,7 +7,7 @@ const useSetDataStore = defineStore("setData", {
       themeType: "light",
       // 壁纸类别
       // 0 本地 / 1 必应 / 2 随机风景 / 3 随机动漫 / 4 自定义
-      backgroundType: 2,
+      backgroundType: 0,
       backgroundCustom: "",
       // 壁纸遮罩
       showBackgroundGray: true,
@@ -28,7 +28,7 @@ const useSetDataStore = defineStore("setData", {
       // 时间样式
       timeStyle: "one",
       // 显示农历
-      showLunar: false,
+      showLunar: true,
       // 是否显秒
       showSeconds: false,
       // 是否显零

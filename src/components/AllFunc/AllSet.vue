@@ -11,13 +11,10 @@
             </div>
             <n-select class="set" v-model:value="themeType" :options="themeTypeOptions" />
           </n-card>
-          <n-card
-            class="set-item cover"
-            :content-style="{
-              flexDirection: 'column',
-              alignItems: 'flex-start',
-            }"
-          >
+          <n-card class="set-item cover" :content-style="{
+            flexDirection: 'column',
+            alignItems: 'flex-start',
+          }">
             <div class="desc">
               <div class="name">
                 <span class="title">壁纸偏好</span>
@@ -25,12 +22,7 @@
               </div>
               <n-space>
                 <Transition name="fade" mode="out-in">
-                  <n-button
-                    v-if="backgroundType !== 0"
-                    strong
-                    secondary
-                    @click="changeBackground(0, true)"
-                  >
+                  <n-button v-if="backgroundType !== 0" strong secondary @click="changeBackground(0, true)">
                     恢复默认
                   </n-button>
                 </Transition>
@@ -42,19 +34,9 @@
                 </n-button>
               </n-space>
             </div>
-            <n-grid
-              class="cover-selete"
-              responsive="screen"
-              cols="2 s:3 m:4 l:4"
-              :x-gap="16"
-              :y-gap="16"
-            >
-              <n-grid-item
-                v-for="(item, index) in backgroundTypeArr"
-                :key="index"
-                :class="index === backgroundType ? 'item check' : 'item'"
-                @click="changeBackground(index)"
-              >
+            <n-grid class="cover-selete" responsive="screen" cols="2 s:3 m:4 l:4" :x-gap="16" :y-gap="16">
+              <n-grid-item v-for="(item, index) in backgroundTypeArr" :key="index"
+                :class="index === backgroundType ? 'item check' : 'item'" @click="changeBackground(index)">
                 <span class="name" v-html="item.name" />
               </n-grid-item>
             </n-grid>
@@ -65,16 +47,11 @@
               <span class="title">搜索引擎</span>
               <span class="tip">切换或自定义搜索引擎</span>
             </div>
-            <n-button
-              strong
-              secondary
-              @click="
-                () => {
-                  status.setSiteStatus('focus');
-                  status.setEngineChangeStatus(true);
-                }
-              "
-            >
+            <n-button strong secondary @click="() => {
+                status.setSiteStatus('focus');
+                status.setEngineChangeStatus(true);
+              }
+              ">
               前往调整
             </n-button>
           </n-card>
@@ -109,14 +86,7 @@
               <span class="title">壁纸模糊</span>
               <span class="tip">调整壁纸高斯模糊的程度</span>
             </div>
-            <n-slider
-              class="set"
-              v-model:value="backgroundBlur"
-              :step="0.01"
-              :min="0"
-              :max="10"
-              :tooltip="false"
-            />
+            <n-slider class="set" v-model:value="backgroundBlur" :step="0.01" :min="0" :max="10" :tooltip="false" />
           </n-card>
           <n-h6 prefix="bar"> 天气与时间 </n-h6>
           <n-card class="set-item">
@@ -207,13 +177,7 @@
               <span class="title">数据恢复</span>
               <span class="tip">将备份的站点内容进行恢复</span>
             </div>
-            <input
-              ref="recoverRef"
-              type="file"
-              style="display: none"
-              accept=".json"
-              @change="recoverSite"
-            />
+            <input ref="recoverRef" type="file" style="display: none" accept=".json" @change="recoverSite" />
             <n-button strong secondary @click="recoverRef?.click()"> 恢复 </n-button>
           </n-card>
         </n-scrollbar>
@@ -223,12 +187,7 @@
     <n-modal preset="card" title="自定义壁纸" v-model:show="customCoverModal" :bordered="false">
       <n-form>
         <n-form-item label="自定义壁纸链接">
-          <n-input
-            clearable
-            type="text"
-            v-model:value="customCoverUrl"
-            placeholder="请输入自定义壁纸链接"
-          />
+          <n-input clearable type="text" v-model:value="customCoverUrl" placeholder="请输入自定义壁纸链接" />
         </n-form-item>
       </n-form>
       <template #footer>
@@ -386,7 +345,7 @@ const backupSite = () => {
   try {
     const date = new Date();
     const dateString = date.toISOString().replace(/[:.]/g, "-");
-    const fileName = `Snavigation_Backup_${dateString}.json`;
+    const fileName = `Mynavigation_Backup_${dateString}.json`;
     const jsonData = JSON.stringify(set.$state);
     const blob = new Blob([jsonData], { type: "application/json" });
     const url = URL.createObjectURL(blob);
@@ -453,6 +412,7 @@ onMounted(() => {
 <style lang="scss">
 .cover-selete {
   margin-top: 12px;
+
   .item {
     cursor: pointer;
     position: relative;
@@ -466,8 +426,10 @@ onMounted(() => {
     transition:
       background-color 0.3s,
       box-shadow 0.3s;
+
     &.check {
       background-color: var(--main-background-hover-color);
+
       &::before {
         content: "";
         position: absolute;
@@ -480,13 +442,16 @@ onMounted(() => {
         transition: opacity 0.3s;
       }
     }
+
     &:hover {
       background-color: var(--main-background-hover-color);
       box-shadow: 0 0 0px 2px var(--main-background-hover-color);
+
       &::before {
         opacity: 0;
       }
     }
+
     &:active {
       box-shadow: none;
     }

@@ -11,18 +11,18 @@
   },
   {
     "id": 2,
-    "name": "图片",
-    "url": "https://www.pexels.com/zh-cn/"
+    "name": "书签",
+    "url": "https://ceyewan.github.io/bookmarks.html"
   },
   {
     "id": 3,
-    "name": "云盘",
-    "url": "https://www.aliyundrive.com/drive/"
+    "name": "Alist",
+    "url": "http://192.168.192.1:5244"
   },
   {
     "id": 4,
-    "name": "Cloudflare",
-    "url": "https://dash.cloudflare.com/"
+    "name": "Blog",
+    "url": "https://ceyewan.github.io/"
   },
   {
     "id": 5,
@@ -32,11 +32,21 @@
   {
     "id": 6,
     "name": "GitHub",
-    "url": "https://github.com/"
+    "url": "https://github.com/ceyewan"
   },
   {
     "id": 7,
     "name": "哔哩哔哩",
     "url": "https://www.bilibili.com/"
+  },
+  {
+    "id": 8,
+    "name": "CSDIY",
+    "url": "https://csdiy.wiki/"
+  },
+  {
+    "id": 9,
+    "name": "ChatGPT",
+    "url": "https://chatgpt.com/"
   }
 ]

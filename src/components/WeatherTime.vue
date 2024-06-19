@@ -1,25 +1,19 @@
 <template>
   <!-- 天气时钟 -->
-  <div
-    :class="[
-      'weather-time',
-      status.siteStatus,
-      status.mainBoxBig && status.siteStatus !== 'normal' && status.siteStatus !== 'focus'
-        ? 'hidden'
-        : null,
-      set.showLunar ? 'lunar' : null,
-      set.timeStyle,
-    ]"
-    @click.stop
-  >
-    <div
-      class="time"
-      @click.stop="
-        status.setSiteStatus(
-          status.siteStatus !== 'normal' && status.siteStatus !== 'focus' ? 'normal' : 'box',
-        )
-      "
-    >
+  <div :class="[
+    'weather-time',
+    status.siteStatus,
+    status.mainBoxBig && status.siteStatus !== 'normal' && status.siteStatus !== 'focus'
+      ? 'hidden'
+      : null,
+    set.showLunar ? 'lunar' : null,
+    set.timeStyle,
+  ]" @click.stop>
+    <div class="time" @click.stop="
+      status.setSiteStatus(
+        status.siteStatus !== 'normal' && status.siteStatus !== 'focus' ? 'normal' : 'box',
+      )
+      ">
       <span class="hour">{{ timeData.hour ?? "00" }}</span>
       <span class="separator" :key="set.showSeconds">:</span>
       <span class="minute">{{ timeData.minute ?? "00" }}</span>
@@ -43,6 +37,7 @@
       <span class="weekday">{{ timeData.weekday ?? "星期八" }}</span>
     </div>
     <div v-if="set.showWeather" class="weather">
+      <span class="city">{{ weatherData?.city ?? "N/A" }}</span>
       <span class="status">{{ weatherData?.condition ?? "N/A" }}</span>
       <span class="temperature">{{ weatherData?.temp ?? "N/A" }} ℃</span>
       <span class="wind">{{ weatherData?.windDir ?? "N/A" }}</span>
@@ -91,7 +86,7 @@ const getWeatherData = async () => {
   if (timeDifference >= 5 * 60 * 1000) {
     const adCodeResult = await getAdcode(weatherKey);
     if (adCodeResult.infocode !== "10000") {
-      return $message.error("地区查询失败");
+      return $message.error("地区查询失败!");
     }
     // 获取天气数据
     const weatherResult = await getWeather(weatherKey, adCodeResult.adcode);
@@ -100,6 +95,7 @@ const getWeatherData = async () => {
     }
     const data = weatherResult.lives[0];
     weatherData.value = {
+      city: data.city,
       condition: data.weather,
       temp: data.temperature,
       windDir: data.winddirection + "风",
@@ -150,12 +146,14 @@ onBeforeUnmount(() => {
     opacity 0.5s,
     margin-bottom 0.3s;
   z-index: 1;
+
   .time {
     cursor: pointer;
     font-size: 3rem;
     margin: 6px 0px;
     text-shadow: var(--main-text-shadow);
     transition: transform 0.3s;
+
     .separator {
       opacity: 0.8;
       font-size: 2.8rem;
@@ -164,29 +162,35 @@ onBeforeUnmount(() => {
       transform: translateY(-4px);
       animation: separator-breathe 0.7s infinite alternate;
     }
+
     .amPm {
       font-size: 1rem;
       opacity: 0.6;
       margin-left: 6px;
     }
+
     &:hover {
       transform: scale(1.08);
     }
+
     &:active {
       transform: scale(1);
     }
   }
+
   .date {
     font-size: 1.15rem;
     opacity: 0.8;
     margin: 4px 0px;
     text-shadow: var(--main-text-shadow);
+
     .month {
       &::after {
         margin: 0 4px;
         content: "月";
       }
     }
+
     .day {
       &::after {
         margin: 0 8px 0 4px;
@@ -194,10 +198,12 @@ onBeforeUnmount(() => {
       }
     }
   }
+
   .lunar {
     font-size: 0.9rem;
     opacity: 0.6;
     text-shadow: var(--main-text-shadow);
+
     .year {
       &::after {
         margin-right: 4px;
@@ -205,13 +211,20 @@ onBeforeUnmount(() => {
       }
     }
   }
+
   .weather {
     opacity: 0.7;
     font-size: 1rem;
     text-shadow: var(--main-text-shadow);
+
+    .status {
+      margin-left: 6px;
+    }
+
     .temperature {
       margin: 0 6px;
     }
+
     .wind-level {
       margin-left: 6px;
     }
@@ -221,35 +234,44 @@ onBeforeUnmount(() => {
     transform: translateY(-180px);
     // transform: translateY(-24vh);
   }
+
   &.box,
   &.set {
     // transform: translateY(-220px);
     transform: translateY(-34vh);
+
     @media (max-width: 478px) {
       transform: translateY(-32vh);
     }
   }
+
   &.hidden {
     transform: translateY(-180px);
     // transform: translateY(-24vh);
     opacity: 0;
   }
+
   &.lunar {
     margin-bottom: 50px;
   }
+
   &.two {
     padding-bottom: 60px;
+
     .time {
       display: flex;
       flex-direction: column;
       align-items: center;
+
       span {
         line-height: normal;
       }
+
       .separator,
       .second {
         display: none;
       }
+
       .hour {
         &::after {
           content: "/";
